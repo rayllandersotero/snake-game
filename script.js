@@ -3,12 +3,13 @@ const context = canvas.getContext("2d");
 
 const box = 32;
 const snake = [{ x: 8 * box, y: 8 * box }];
-const food = {
-  x: parseInt(Math.random() * 15 + 1) * box,
-  y: parseInt(Math.random() * 15 + 1) * box,
-};
+let food = { x: randomFoodLocation(), y: randomFoodLocation() };
 
 let direction = "right";
+
+function randomFoodLocation() {
+  return parseInt(Math.random() * 15 + 1) * box;
+}
 
 function setBackground() {
   context.fillStyle = "lightgreen";
@@ -55,8 +56,7 @@ function start() {
   if (snakeX !== food.x || snakeY !== food.y) {
     snake.pop();
   } else {
-    food.x = parseInt(Math.random() * 15 + 1) * box;
-    food.y = parseInt(Math.random() * 15 + 1) * box;
+    food = { x: randomFoodLocation(), y: randomFoodLocation() };
   }
 
   const snakeHead = { x: snakeX, y: snakeY };
